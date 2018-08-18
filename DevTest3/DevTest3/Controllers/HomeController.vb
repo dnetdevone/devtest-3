@@ -1,4 +1,4 @@
-﻿Public Class HomeController
+Public Class HomeController
     Inherits System.Web.Mvc.Controller
 
     Function Index() As ActionResult
@@ -21,13 +21,20 @@
         Dim result As Player = Nothing
 
         If Not String.IsNullOrEmpty(model.Name) Then
-            result = data.Where(Function(d) d.Name.Contains(model.Name)).FirstOrDefault()
-        End If
+            result = data.Where(Function(d) d.Name.ToLower.Contains(model.Name.ToLower)).FirstOrDefault()
 
-        model.Name = result.Name
-        model.Ranking = result.Ranking
+            If result IsNot Nothing Then
+                model.Name = result.Name
+                model.Ranking = result.Ranking
+            Else
+                ViewBag.Name = model.Name
+                model.Name = Nothing
+
+            End If
+        End If
 
         Return View(model)
 
     End Function
 End Class
+
