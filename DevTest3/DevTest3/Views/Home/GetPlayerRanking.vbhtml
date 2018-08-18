@@ -1,4 +1,4 @@
-﻿@ModelType GetPlayerRanking
+@ModelType GetPlayerRanking
 @Code
     ViewData("Title") = "Get Player Ranking"
 End Code
@@ -24,9 +24,17 @@ End Code
                     <div class="col-md-4">
                         <h2>@Model.Name</h2>
                         <p>
-
                             <strong>Ranking:</strong>  @Model.Ranking
                         </p>
+
+                    </div>
+
+                </div>
+            ElseIf Model.Name Is Nothing And Model.Ranking = 0 Then
+
+                @<div class="row">
+                    <div class="col-md-8">
+                        <h2>Could not find player: @ViewBag.Name </h2>                     
 
                     </div>
 
